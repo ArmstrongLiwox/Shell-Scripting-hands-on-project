@@ -1,0 +1,349 @@
+<h1 id="shell-scripting-hands-on-project-armstrong-">Shell Scripting hands-on project - <strong><em>Armstrong</em></strong></h1>
+<h2 id="introduction-to-shell-scripting-and-user-input">Introduction to shell scripting and User Input</h2>
+<blockquote>
+<p>Shell scripting helps to automate repititive tasks.</p>
+<p>Bash scripts are essentially a series of commands and instructions that are executed sequentially in a shell.</p>
+</blockquote>
+<p><img src="images/start.png" alt="git bash"></p>
+<h2 id="create-a-script-file-in-bash">Create a script file in bash</h2>
+<pre><code>touch <span class="hljs-keyword">script</span>.sh
+</code></pre><p>...</p>
+<h2 id="shell-scripting-syntax-elements">Shell Scripting Syntax Elements</h2>
+<ol>
+<li><h2 id="variables">Variables</h2>
+</li>
+</ol>
+<blockquote>
+<p>Bash allows you to define work with variables</p>
+<p>Variables can store date of various kinds</p>
+<p>You can assign values to various variables using the = operator, and access their values using the variable name preceded by a $ sign.</p>
+</blockquote>
+<p>Example : Assign value to <em>variable</em></p>
+<pre><code><span class="hljs-attr">name</span>=<span class="hljs-string">"Armstrong"</span>
+</code></pre><pre><code><span class="hljs-built_in">echo</span> <span class="hljs-variable">$name</span>
+</code></pre><p><img src="images/echo name.png" alt="echo name"></p>
+<ol>
+<li><h2 id="control-flow">Control Flow</h2>
+</li>
+</ol>
+<blockquote>
+<p>Bash provides control flow statements like:</p>
+</blockquote>
+<p>if-else </p>
+<p>for loopsand case statements to control the flow of the execution in your scripts.  </p>
+<p>Example: Using <em>if-else</em> to execute script based on a condition.</p>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Example script to check if a number is positive, negative, or zero</span>
+
+<span class="hljs-built_in">read</span> -p <span class="hljs-string">"Enter a number: "</span> num
+
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$num</span> <span class="hljs-_">-gt</span> 0 ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"The number is positive."</span>
+<span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$num</span> <span class="hljs-_">-lt</span> 0 ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"The number is negative."</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"The number is zero."</span>
+<span class="hljs-keyword">fi</span>
+</code></pre><p><img src="images/script.png" alt="paste scripr code"></p>
+<pre><code>chmod +x <span class="hljs-keyword">script</span>.sh
+</code></pre><blockquote>
+<p>run the script</p>
+</blockquote>
+<pre><code>./<span class="hljs-keyword">script</span>.sh
+</code></pre><p><img src="images/number response.png" alt="number is positive"></p>
+<p>Example : Iterating through a list using <strong><em>a</em></strong> for loop</p>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Example script to print numbers from 1 to 5 using a for loop</span>
+
+<span class="hljs-keyword">for</span> (( i=1; i&lt;=5; i++ ))
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+</code></pre><blockquote>
+<p>run the script</p>
+</blockquote>
+<pre><code>./<span class="hljs-keyword">script</span>.sh
+</code></pre><p><img src="images/iterate number.png" alt="iterate numbers"></p>
+<ol>
+<li><h2 id="command-substitution-">Command Substitution:</h2>
+</li>
+</ol>
+<blockquote>
+<p>Command Substitution allows you to capture the output of a command and use it as a value within your script.</p>
+<p>You can use the backtick or the <strong><em>$()</em></strong> syntax for command substitution.</p>
+<p><em>Example:</em> </p>
+<p>Using backtick for command substitution</p>
+</blockquote>
+<pre><code>current_date=`date +<span class="hljs-built_in">%Y</span>-<span class="hljs-built_in">%m</span>-<span class="hljs-built_in">%d</span>`
+</code></pre><pre><code>current_date=$(<span class="hljs-keyword">date</span> +%Y-%m-%d)
+</code></pre><pre><code>echo <span class="hljs-string">"Enter your name:"</span>
+<span class="hljs-built_in">read</span> <span class="hljs-built_in">name</span>
+</code></pre><pre><code><span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello World"</span>
+</code></pre><pre><code><span class="hljs-keyword">echo</span> <span class="hljs-string">"hello world"</span> &gt; <span class="hljs-built_in">index</span>.txt
+</code></pre><pre><code>grep <span class="hljs-string">"pattern"</span> &lt; <span class="hljs-selector-tag">input</span>.txt
+</code></pre><pre><code><span class="hljs-keyword">echo</span> <span class="hljs-string">"hello world"</span> | <span class="hljs-keyword">grep</span> <span class="hljs-string">"pattern"</span>
+</code></pre><pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Define a function to greet the user</span>
+<span class="hljs-function"><span class="hljs-title">greet</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello, <span class="hljs-variable">$1</span>! Nice to meet you."</span>
+}
+
+<span class="hljs-comment"># Call the greet function and pass the name as an argument</span>
+greet <span class="hljs-string">"Armstrong"</span>
+</code></pre><h2 id="writing-our-first-script">Writing our first script</h2>
+<blockquote>
+<p><strong>Step 1</strong> </p>
+<p>Open a folder called shell-scripting</p>
+</blockquote>
+<pre><code><span class="hljs-keyword">mkdir</span> <span class="hljs-keyword">shell</span>-scripting
+</code></pre><blockquote>
+<p><strong>Step 2</strong> </p>
+<p>Create a file called user-input.sh</p>
+</blockquote>
+<pre><code>touch user-<span class="hljs-keyword">input</span>.<span class="hljs-keyword">sh</span>
+</code></pre><p><img src="images/create file.png" alt="create folder and file"></p>
+<blockquote>
+<p><strong>Step 3</strong> </p>
+<p>paste block of code into the file</p>
+</blockquote>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Prompt the user for their name</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Enter your name:"</span>
+<span class="hljs-built_in">read</span> name
+
+<span class="hljs-comment"># Display a greeting with the entered name</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello, <span class="hljs-variable">$name</span>! Nice to meet you."</span>
+</code></pre><p><img src="images/paste code.png" alt="code"></p>
+<blockquote>
+<p><strong>Step 4</strong> </p>
+<p>Save the file</p>
+<p><strong>Step 5</strong> </p>
+<p>Make the file executable</p>
+</blockquote>
+<pre><code>sudo chmod +x user-<span class="hljs-keyword">input</span>.<span class="hljs-keyword">sh</span>
+</code></pre><blockquote>
+<p><strong>Step 6</strong> </p>
+<p>Run the script</p>
+</blockquote>
+<pre><code>./user-<span class="hljs-keyword">input</span>.<span class="hljs-keyword">sh</span>
+</code></pre><p><img src="images/run script.png" alt="run script"></p>
+<h2 id="directory-manipulation-and-navigation">Directory Manipulation and Navigation</h2>
+<blockquote>
+<p>Directory Manipulation and Navigation</p>
+<p><strong>Step 1</strong> </p>
+<p>Open a file named navigating-linux-filesystem.sh</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">touch</span> <span class="hljs-selector-tag">navigating-linux-filesystem</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 2</strong> </p>
+<p>Paste code block into file</p>
+</blockquote>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Display current directory</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Current directory: <span class="hljs-variable">$PWD</span>"</span>
+
+<span class="hljs-comment"># Create a new directory</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Creating a new directory..."</span>
+mkdir my_directory
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"New directory created."</span>
+
+<span class="hljs-comment"># Change to the new directory</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Changing to the new directory..."</span>
+<span class="hljs-built_in">cd</span> my_directory
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Current directory: <span class="hljs-variable">$PWD</span>"</span>
+
+<span class="hljs-comment"># Create some files</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Creating files..."</span>
+touch file1.txt
+touch file2.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Files created."</span>
+
+<span class="hljs-comment"># List the files in the current directory</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Files in the current directory:"</span>
+ls
+
+<span class="hljs-comment"># Move one level up</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Moving one level up..."</span>
+<span class="hljs-built_in">cd</span> ..
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Current directory: <span class="hljs-variable">$PWD</span>"</span>
+
+<span class="hljs-comment"># Remove the new directory and its contents</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Removing the new directory..."</span>
+rm -rf my_directory
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Directory removed."</span>
+
+<span class="hljs-comment"># List the files in the current directory again</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Files in the current directory:"</span>
+ls
+</code></pre><p><img src="images/create nav.png" alt="create nav"></p>
+<blockquote>
+<p><strong>Step 3</strong> </p>
+<p>Make script executable</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">navigating-linux-filesystem</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 4</strong> </p>
+<p>Run the script</p>
+</blockquote>
+<pre><code>./navigating-linux-filesystem.<span class="hljs-keyword">sh</span>
+</code></pre><p><img src="images/run nav file.png" alt="run nav"></p>
+<h2 id="file-opening-and-sorting">File Opening and Sorting</h2>
+<blockquote>
+<p>File Opening and SortingS</p>
+<p><strong>Step 1</strong> </p>
+<p>Create a file named sorting.sh</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">touch</span> <span class="hljs-selector-tag">sorting</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 2</strong> </p>
+<p>Copy and paste code into the script file</p>
+</blockquote>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Create three files</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Creating files..."</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"This is file3."</span> &gt; file3.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"This is file1."</span> &gt; file1.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"This is file2."</span> &gt; file2.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Files created."</span>
+
+<span class="hljs-comment"># Display the files in their current order</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Files in their current order:"</span>
+ls
+
+<span class="hljs-comment"># Sort the files alphabetically</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Sorting files alphabetically..."</span>
+ls | sort &gt; sorted_files.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Files sorted."</span>
+
+<span class="hljs-comment"># Display the sorted files</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Sorted files:"</span>
+cat sorted_files.txt
+
+<span class="hljs-comment"># Remove the original files</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Removing original files..."</span>
+rm file1.txt file2.txt file3.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Original files removed."</span>
+
+<span class="hljs-comment"># Rename the sorted file to a more descriptive name</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Renaming sorted file..."</span>
+mv sorted_files.txt sorted_files_sorted_alphabetically.txt
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"File renamed."</span>
+
+<span class="hljs-comment"># Display the final sorted file</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Final sorted file:"</span>
+cat sorted_files_sorted_alphabetically.txt
+</code></pre><p><img src="images/nano sorting.png" alt="nano sorting"></p>
+<blockquote>
+<p><strong>Step 3</strong> </p>
+<p>Make script executable</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">sorting</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 4</strong> </p>
+<p>Run the script</p>
+</blockquote>
+<pre><code>./sorting.<span class="hljs-keyword">sh</span>
+</code></pre><p><img src="images/sorting.png" alt="sorting"></p>
+<h2 id="working-with-numbers-and-calculations">Working with numbers and calculations</h2>
+<blockquote>
+<p>Working with numbers and calculations</p>
+<p>File Opening and SortingS</p>
+<p><strong>Step 1</strong> </p>
+<p>Create a file named calculations.sh</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">touch</span> <span class="hljs-selector-tag">calculations</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 2</strong> </p>
+<p>Copy and paste code into the script file</p>
+</blockquote>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Define two variables with numeric values</span>
+num1=10
+num2=5
+
+<span class="hljs-comment"># Perform basic arithmetic operations</span>
+sum=$((num1 + num2))
+difference=$((num1 - num2))
+product=$((num1 * num2))
+quotient=$((num1 / num2))
+remainder=$((num1 % num2))
+
+<span class="hljs-comment"># Display the results</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Number 1: <span class="hljs-variable">$num1</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Number 2: <span class="hljs-variable">$num2</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Sum: <span class="hljs-variable">$sum</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Difference: <span class="hljs-variable">$difference</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Product: <span class="hljs-variable">$product</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Quotient: <span class="hljs-variable">$quotient</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Remainder: <span class="hljs-variable">$remainder</span>"</span>
+
+<span class="hljs-comment"># Perform some more complex calculations</span>
+power_of_2=$((num1 ** 2))
+square_root=$(awk <span class="hljs-string">"BEGIN{ sqrt=<span class="hljs-variable">$num2</span>; print sqrt }"</span>)
+
+<span class="hljs-comment"># Display the results</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Number 1 raised to the power of 2: <span class="hljs-variable">$power_of_2</span>"</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Square root of number 2: <span class="hljs-variable">$square_root</span>"</span>
+</code></pre><p><img src="images/create and paste calculations.png" alt="calculations.sh"></p>
+<blockquote>
+<p><strong>Step 3</strong> </p>
+<p>Make script executable</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">calculations</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 4</strong> </p>
+<p>Run the script</p>
+</blockquote>
+<pre><code>./calculations.<span class="hljs-keyword">sh</span>
+</code></pre><p><img src="images/run calculations.png" alt="run calculations"></p>
+<h2 id="file-backup-and-stamp-testing">File Backup and Stamp testing</h2>
+<blockquote>
+<p>File Backup and Stamp testing</p>
+<p><strong>Step 1</strong> </p>
+<p>Create a file named backup.sh</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">touch</span> <span class="hljs-selector-tag">backup</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 2</strong> </p>
+<p>Copy and paste code into the script file</p>
+</blockquote>
+<pre><code><span class="hljs-meta">#!/bin/bash
+</span>
+<span class="hljs-comment"># Define the source directory and backup directory</span>
+source_dir=<span class="hljs-string">"/path/to/source_directory"</span>
+backup_dir=<span class="hljs-string">"/path/to/backup_directory"</span>
+
+<span class="hljs-comment"># Create a timestamp with the current date and time</span>
+timestamp=$(date +<span class="hljs-string">"%Y%m%d%H%M%S"</span>)
+
+<span class="hljs-comment"># Create a backup directory with the timestamp</span>
+backup_dir_with_timestamp=<span class="hljs-string">"<span class="hljs-variable">$backup_dir</span>/backup_<span class="hljs-variable">$timestamp</span>"</span>
+
+<span class="hljs-comment"># Create the backup directory</span>
+mkdir -p <span class="hljs-string">"<span class="hljs-variable">$backup_dir_with_timestamp</span>"</span>
+
+<span class="hljs-comment"># Copy all files from the source directory to the backup directory</span>
+cp -r <span class="hljs-string">"<span class="hljs-variable">$source_dir</span>"</span>/* <span class="hljs-string">"<span class="hljs-variable">$backup_dir_with_timestamp</span>"</span>
+
+<span class="hljs-comment"># Display a message indicating the backup process is complete</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Backup completed. Files copied to: <span class="hljs-variable">$backup_dir_with_timestamp</span>"</span>
+</code></pre><p><img src="images/backup.png" alt="backup"></p>
+<blockquote>
+<p><strong>Step 3</strong> </p>
+<p>Make script executable</p>
+</blockquote>
+<pre><code><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">backup</span><span class="hljs-selector-class">.sh</span>
+</code></pre><blockquote>
+<p><strong>Step 4</strong> </p>
+<p>Run the script</p>
+</blockquote>
+<pre><code>./backup.<span class="hljs-keyword">sh</span>
+</code></pre><p><img src="images/backup complete.png" alt="backup complete"></p>
+<h1 id="thank-you">Thank You</h1>
